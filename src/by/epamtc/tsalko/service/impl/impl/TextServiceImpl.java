@@ -1,10 +1,9 @@
 package by.epamtc.tsalko.service.impl.impl;
 
 import by.epamtc.tsalko.bean.Component;
-import by.epamtc.tsalko.bean.Sentence;
-import by.epamtc.tsalko.bean.Text;
-import by.epamtc.tsalko.bean.Word;
-import by.epamtc.tsalko.main.print.PrintComponent;
+import by.epamtc.tsalko.bean.impl.Sentence;
+import by.epamtc.tsalko.bean.impl.Text;
+import by.epamtc.tsalko.bean.impl.Word;
 import by.epamtc.tsalko.service.impl.SentenceComparator;
 import by.epamtc.tsalko.service.impl.TextService;
 
@@ -13,27 +12,28 @@ import java.util.List;
 
 public class TextServiceImpl implements TextService {
 
-    private final PrintComponent printComponent = new PrintComponent();
+    private final SentenceComparator sentenceComparator = new SentenceComparator();
 
     @Override
-    public void printSentencesAscending(Text text) {
+    public List<Sentence> formSentencesAscending(Text text) {
         List<Sentence> sentences = getListSentences(text);
-
-        sentences.sort(new SentenceComparator());
-
-        printComponent.printSentences(sentences);
+        sentences.sort(sentenceComparator);
+        return sentences;
     }
 
     @Override
-    public void printSentenceOppositeReplacementFirstLastWords(Text text) {
+    public List<Sentence> formSentenceOppositeReplacementFirstLastWords(Text text) {
         List<Sentence> sentences = getListSentences(text);
 
         for (Sentence sentence : sentences) {
-            List<Word> words = sentence.getWords();
+            List<Word> words = sentence.getSentence();
 
-            if (words.get(words.size() - 1).getWord().equals("\n")) {
+            if (words.get(words.size() - 1).getContent().equals("\n")) {
+                // TODO
             }
         }
+
+        return sentences;
     }
 
     private List<Sentence> getListSentences(Text text) {

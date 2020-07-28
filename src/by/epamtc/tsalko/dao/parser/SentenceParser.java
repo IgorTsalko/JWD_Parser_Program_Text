@@ -1,7 +1,7 @@
 package by.epamtc.tsalko.dao.parser;
 
-import by.epamtc.tsalko.bean.Sentence;
-import by.epamtc.tsalko.bean.Word;
+import by.epamtc.tsalko.bean.impl.Sentence;
+import by.epamtc.tsalko.bean.impl.Word;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +12,10 @@ public class SentenceParser {
 
     private final WordParser wordParser = ParserFactory.getWordParser();
 
-    // Разбирает текстовый блок на предложения (^.+\n)|(\s*?.+?\n*?.+?[.!?])
-    private final String sentenceRegEx = "(\\.+.+[$\\n])|((\\d+\\.)+.+$)|((.+?\\n*?)+?[:.!?]\\s?)";
     // Разбивает текстовый блок на меньшие части чтобы не словить StackOverflowError
-    private final String smallTextBlock = ".{3}(.*?\\n*?)+?[:.!?]\\s?";
+    private final String smallTextBlock = "(.{10}(.*?\\n*?)+?[:.!?]\\s?)";
+    // Разбирает текстовый блок на предложения
+    private final String sentenceRegEx = "(\\.+.+[$\\n])|((\\d+\\.)+.+[$\\n])|((.+?\\n*?)+?[:.!?]\\s?)";
 
     public List<Sentence> parseSentences(String textBlock) {
         List<Sentence> sentences = new ArrayList<>();
@@ -30,10 +30,6 @@ public class SentenceParser {
             while (sentenceMatcher.find()) {
                 Sentence sentenceEntity = new Sentence();
                 String sentence = sentenceMatcher.group();
-
-//            System.out.print(sentence);
-//            System.out.print(" || ");
-
                 List<Word> words = wordParser.parseWord(sentence);
 
                 for (Word w : words) {

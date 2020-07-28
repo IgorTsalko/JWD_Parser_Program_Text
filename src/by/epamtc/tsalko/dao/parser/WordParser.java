@@ -1,6 +1,6 @@
 package by.epamtc.tsalko.dao.parser;
 
-import by.epamtc.tsalko.bean.Word;
+import by.epamtc.tsalko.bean.impl.Word;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,8 @@
 package by.epamtc.tsalko.dao.parser;
 
-import by.epamtc.tsalko.bean.CodeBlock;
-import by.epamtc.tsalko.bean.Sentence;
-import by.epamtc.tsalko.bean.Text;
+import by.epamtc.tsalko.bean.impl.CodeBlock;
+import by.epamtc.tsalko.bean.impl.Sentence;
+import by.epamtc.tsalko.bean.impl.Text;
 
 import java.util.List;
 import java.util.regex.Matcher;

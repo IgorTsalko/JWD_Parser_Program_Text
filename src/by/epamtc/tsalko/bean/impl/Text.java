@@ -1,7 +1,10 @@
-package by.epamtc.tsalko.bean;
+package by.epamtc.tsalko.bean.impl;
+
+import by.epamtc.tsalko.bean.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Text implements Component {
 
@@ -20,13 +23,26 @@ public class Text implements Component {
     }
 
     @Override
-    public String forPrint() {
+    public String getContent() {
         StringBuilder buff = new StringBuilder();
 
         for (Component c : text) {
-            buff.append(c.forPrint());
+            buff.append(c.getContent());
         }
 
         return buff.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Text text1 = (Text) o;
+        return text.equals(text1.text);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(text);
     }
 }

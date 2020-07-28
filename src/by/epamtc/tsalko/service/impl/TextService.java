@@ -1,13 +1,16 @@
 package by.epamtc.tsalko.service.impl;
 
-import by.epamtc.tsalko.bean.Text;
+import by.epamtc.tsalko.bean.impl.Sentence;
+import by.epamtc.tsalko.bean.impl.Text;
+
+import java.util.List;
 
 public interface TextService {
 
     // №2
-    void printSentencesAscending(Text text);
+    List<Sentence> formSentencesAscending(Text text);
 
     // №5
-    void printSentenceOppositeReplacementFirstLastWords(Text text);
+    List<Sentence> formSentenceOppositeReplacementFirstLastWords(Text text);
 
 }
