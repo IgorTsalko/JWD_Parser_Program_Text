@@ -1,5 +1,7 @@
 package by.epamtc.tsalko.dao.parser;
 
+import by.epamtc.tsalko.dao.exception.DAOException;
+
 public class ParserFactory {
 
     private static ComponentParser componentParser;

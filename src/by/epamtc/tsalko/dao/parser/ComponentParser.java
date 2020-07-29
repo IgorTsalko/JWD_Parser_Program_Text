@@ -3,6 +3,7 @@ package by.epamtc.tsalko.dao.parser;
 import by.epamtc.tsalko.bean.impl.CodeBlock;
 import by.epamtc.tsalko.bean.impl.Sentence;
 import by.epamtc.tsalko.bean.impl.Text;
+import by.epamtc.tsalko.dao.exception.DAOException;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -12,15 +13,13 @@ public class ComponentParser {
 
     private final SentenceParser sentenceParser = ParserFactory.getSentenceParser();
 
-    // Разделяет текст на абзацы и блоки кода
-    private final String componentsRegExp = "(?<TextBlock>[^{}]+\\n)" +
-                                            "|" +
-                                            "(?<CodeBlock>.*\\{\\n(.*\\n)+?\\n*}\\n)";
+    private final String componentsRegExp = PropertyReader.getInstance().getProperty("componentsRegExp");
+    private final Pattern pattern = Pattern.compile(componentsRegExp);
+
 
     public Text createText(String allText) {
         Text text = new Text();
 
-        Pattern pattern = Pattern.compile(componentsRegExp);
         Matcher matcher = pattern.matcher(allText);
 
         while (matcher.find()) {
@@ -32,16 +31,10 @@ public class ComponentParser {
                 for (Sentence s : sentences) {
                     text.addTextComponent(s);
                 }
-
-//                System.out.println(textBlock);
-//                System.out.println("________________________________________________________________");
             }
 
             if (codeBLock != null) {
                 text.addTextComponent(new CodeBlock(codeBLock));
-
-//                System.out.println(codeBLock);
-//                System.out.println("________________________________________________________________");
             }
         }
 

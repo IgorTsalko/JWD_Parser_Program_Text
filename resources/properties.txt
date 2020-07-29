@@ -1,0 +1,4 @@
+componentsRegExp=(?<TextBlock>[^{}]+\\n)|(?<CodeBlock>.*\\{\\n(.*\\n)+?\\n*}\\n)
+smallTextBlock=(.{10}(.*?\\n*?)+?[:.!?]\\s?)
+sentenceRegEx=(\\.+.+[$\\n])|((\\d+\\.)+.+[$\\n])|((.+?\\n*?)+?[:.!?]\\s?)
+wordRegEx=(\\w+|\\W)

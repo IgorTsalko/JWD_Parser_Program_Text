@@ -33,9 +33,9 @@ public class Main {
             System.out.println();
 
             // Вывод всех предложений с заменой мест первого и последнего слова
-//            System.out.println("Вывод всех предложений с заменой мест первого и последнего слова _____________________________");
-//            textService.formSentenceOppositeReplacementFirstLastWords(text);
-//            System.out.println();
+            System.out.println("Вывод всех предложений с заменой мест первого и последнего слова _____________________________");
+            textService.formSentenceOppositeReplacementFirstLastWords(text);
+            System.out.println();
 
         } catch (DAOException e) {
             logger.error("Ошибка программы", e);

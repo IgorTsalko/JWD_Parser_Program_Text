@@ -12,6 +12,9 @@ public class TextDAOImpl implements TextDAO {
     private final ComponentParser componentParser = ParserFactory.getComponentParser();
     private final ReaderFromFile reader = new ReaderFromFile();
 
+    public TextDAOImpl() {
+    }
+
     @Override
     public Text getText() throws DAOException {
         return componentParser.createText(reader.readAllText());
