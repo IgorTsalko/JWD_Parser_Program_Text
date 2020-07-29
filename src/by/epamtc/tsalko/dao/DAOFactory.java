@@ -6,7 +6,7 @@ import by.epamtc.tsalko.dao.impl.TextDAOImpl;
 public class DAOFactory {
     private static final DAOFactory instance = new DAOFactory();
 
-    private final TextDAO textDAO = new TextDAOImpl();
+    private static TextDAO textDAO;
 
     private DAOFactory() {}
 
@@ -14,7 +14,10 @@ public class DAOFactory {
         return instance;
     }
 
-    public TextDAO getTextDAO() {
+    public TextDAO getTextDAO() throws DAOException {
+        if (textDAO == null) {
+            textDAO = new TextDAOImpl();
+        }
         return textDAO;
     }
 }

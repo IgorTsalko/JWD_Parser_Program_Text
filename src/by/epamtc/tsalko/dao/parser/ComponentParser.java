@@ -1,7 +1,7 @@
 package by.epamtc.tsalko.dao.parser;
 
+import by.epamtc.tsalko.bean.Component;
 import by.epamtc.tsalko.bean.impl.CodeBlock;
-import by.epamtc.tsalko.bean.impl.Sentence;
 import by.epamtc.tsalko.bean.impl.Text;
 import by.epamtc.tsalko.dao.exception.DAOException;
 
@@ -11,11 +11,15 @@ import java.util.regex.Pattern;
 
 public class ComponentParser {
 
-    private final SentenceParser sentenceParser = ParserFactory.getSentenceParser();
+    private final SentenceParser sentenceParser;
+    private final String componentsRegExp;
+    private final Pattern pattern;
 
-    private final String componentsRegExp = PropertyReader.getInstance().getProperty("componentsRegExp");
-    private final Pattern pattern = Pattern.compile(componentsRegExp);
-
+    public ComponentParser() throws DAOException {
+        sentenceParser = ParserFactory.getSentenceParser();
+        componentsRegExp = PropertyReader.getInstance().getProperty("componentsRegExp");
+        pattern = Pattern.compile(componentsRegExp);
+    }
 
     public Text createText(String allText) {
         Text text = new Text();
@@ -27,9 +31,9 @@ public class ComponentParser {
             String codeBLock = matcher.group("CodeBlock");
 
             if (textBlock != null) {
-                List<Sentence> sentences = sentenceParser.parseSentences(textBlock);
-                for (Sentence s : sentences) {
-                    text.addTextComponent(s);
+                List<Component> sentences = sentenceParser.parseSentences(textBlock);
+                for (Component c : sentences) {
+                    text.addTextComponent(c);
                 }
             }
 

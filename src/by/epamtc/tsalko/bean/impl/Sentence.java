@@ -8,29 +8,37 @@ import java.util.Objects;
 
 public class Sentence implements Component {
 
-    private final List<Word> sentence;
+    private final List<Component> partsOfSentence;
 
     public Sentence() {
-        sentence = new ArrayList<>();
+        partsOfSentence = new ArrayList<>();
     }
 
     @Override
     public String getContent() {
         StringBuilder buff = new StringBuilder();
 
-        for (Component c : sentence) {
+        for (Component c : partsOfSentence) {
             buff.append(c.getContent());
         }
 
         return buff.toString();
     }
 
-    public List<Word> getSentence() {
-        return sentence;
+    public List<Component> getPartsOfSentence() {
+        return partsOfSentence;
     }
 
-    public void addWord(Word word) {
-        sentence.add(word);
+    public void addPart(Component component) {
+        partsOfSentence.add(component);
+    }
+
+    public void addPart(int index, Component component) {
+        partsOfSentence.add(index, component);
+    }
+
+    public void removePart(Component component) {
+        partsOfSentence.remove(component);
     }
 
     @Override
@@ -38,11 +46,11 @@ public class Sentence implements Component {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Sentence sentence = (Sentence) o;
-        return this.sentence.equals(sentence.sentence);
+        return this.partsOfSentence.equals(sentence.partsOfSentence);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(sentence);
+        return Objects.hash(partsOfSentence);
     }
 }

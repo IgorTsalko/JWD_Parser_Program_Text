@@ -9,10 +9,12 @@ import by.epamtc.tsalko.dao.parser.ParserFactory;
 
 public class TextDAOImpl implements TextDAO {
 
-    private final ComponentParser componentParser = ParserFactory.getComponentParser();
-    private final ReaderFromFile reader = new ReaderFromFile();
+    private final ComponentParser componentParser;
+    private final ReaderFromFile reader;
 
-    public TextDAOImpl() {
+    public TextDAOImpl() throws DAOException {
+        componentParser = ParserFactory.getComponentParser();
+        reader = new ReaderFromFile();
     }
 
     @Override
